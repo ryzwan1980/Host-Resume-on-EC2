@@ -18,6 +18,10 @@ jobs:
         echo "${{ secrets.EC2_KEY_PEM }}" > ec2-key.pem
         chmod 600 ec2-key.pem
 
+    - name: Add EC2 Host to Known Hosts
+      run: |
+        ssh-keyscan -H 15.206.222.96 >> ~/.ssh/known_hosts
+
     - name: Fix Apache Directory Permissions
       run: |
         ssh -i ec2-key.pem ubuntu@15.206.222.96 "sudo chown -R ubuntu:ubuntu /var/www/html/"
