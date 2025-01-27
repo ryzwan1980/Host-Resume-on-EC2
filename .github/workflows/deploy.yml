@@ -16,7 +16,7 @@ jobs:
     - name: Save EC2 Key
       run: |
         echo "${{ secrets.EC2_KEY_PEM }}" > ec2-key.pem
-        chmod 600 ec2-key.pem
+        chmod 600 ec2-key.pem  # Correct file permissions
 
     - name: Create .ssh directory
       run: |
