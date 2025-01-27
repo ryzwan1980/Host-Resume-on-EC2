@@ -19,7 +19,7 @@ jobs:
         chmod 600 ec2-key.pem
 
     - name: Copy index.html to EC2
-      uses: appleboy/scp-action@v0.2.1
+      uses: appleboy/scp-action@v0.1.4 # Updated version
       with:
         host: 15.206.222.96
         username: ubuntu
