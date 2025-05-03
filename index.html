@@ -1,1 +1,254 @@
-loop
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Riswan Rahmathulla - AWS Architect Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      overflow-x: hidden;
+    }
+
+    /* Hero Section */
+    .hero {
+      background-color: #212121;
+      color: white;
+      text-align: center;
+      padding: 120px 20px;
+      background-image: url('https://source.unsplash.com/1600x900/?clouds');
+      background-size: cover;
+      background-position: center;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .hero h1 {
+      font-size: 3.5em;
+      margin: 0;
+      animation: slideIn 1s ease-out;
+    }
+
+    .hero p {
+      font-size: 1.2em;
+      margin-top: 10px;
+      animation: slideIn 1.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes slideIn {
+      0% { transform: translateX(-50%); opacity: 0; }
+      100% { transform: translateX(0); opacity: 1; }
+    }
+
+    /* Section Styling */
+    section {
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    section h2 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      color: #333;
+      animation: slideUp 1s ease-out;
+      font-family: 'Ubuntu', sans-serif;
+    }
+
+    section p {
+      font-size: 1.1em;
+      color: #666;
+      line-height: 1.8;
+      margin-bottom: 40px;
+      animation: slideUp 1.2s ease-out;
+    }
+
+    @keyframes slideUp {
+      0% { transform: translateY(50px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    .contact-details {
+      font-size: 1.1em;
+      color: #555;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    .contact-details span {
+      font-weight: bold;
+    }
+
+    /* Navigation Styling */
+    nav {
+      background-color: #212121;
+      padding: 20px 0;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav a {
+      color: #f4f4f9;
+      text-decoration: none;
+      padding: 10px 20px;
+      margin: 0 15px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+      font-size: 1.2em;
+    }
+
+    nav a:hover {
+      background-color: #00c853;
+      transform: scale(1.1);
+    }
+
+    /* Card Container Styling */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 40px 20px;
+    }
+
+    .card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      padding: 30px;
+      text-align: left;
+      font-size: 1.1em;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+    }
+
+    .card h3 {
+      margin-top: 10px;
+      color: #333;
+      font-size: 1.8em;
+      font-family: 'Ubuntu', sans-serif;
+    }
+
+    .card p {
+      color: #666;
+      margin-bottom: 15px;
+    }
+
+    .card ul {
+      list-style-type: square;
+      color: #444;
+      padding-left: 20px;
+    }
+
+    /* Footer Styling */
+    footer {
+      background-color: #212121;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+      margin-top: 40px;
+    }
+
+    footer p {
+      margin: 0;
+    }
+
+    /* Media Queries for Responsiveness */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5em;
+      }
+
+      section h2 {
+        font-size: 2em;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav>
+    <a href="#profile">Profile</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="hero">
+    <h1>Riswan Rahmathulla</h1>
+    <p>AWS Architect & Cloud Engineer</p>
+  </div>
+
+  <!-- Profile Section -->
+  <section id="profile">
+    <h2>Profile</h2>
+    <p>Experienced AWS Technical Support Engineer and AWS Cloud Architect. Skilled in troubleshooting cloud infrastructure, optimizing deployments, and ensuring smooth operations. Proficient in a wide range of AWS services with expertise in DevOps tools like Docker and Jenkins. Known for a customer-first approach, I am passionate about continuously learning in the evolving cloud space.</p>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience">
+    <h2>Professional Experience</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Postiefs Technologies</h3>
+        <p><strong>Role:</strong> AWS Architect & Cloud Engineer</p>
+        <p><strong>Duration:</strong> February 2024 - Present</p>
+        <p>At Postiefs Technologies, I designed and deployed cost-effective, reliable AWS solutions tailored to client needs. I implemented Auto Scaling with AWS EC2 and Jenkins for continuous integration, enabling real-time updates on existing and new servers. My work helped optimize cloud infrastructure for over 80 clients, including leading automobile companies and major news channels.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Netflix Clone Deployment</h3>
+        <p><strong>Technologies Used:</strong> Docker, SonarQube, Trivy, Jenkins, Prometheus, AWS EKS</p>
+        <p>This project involved deploying a Netflix clone in a containerized environment using Docker. I leveraged Jenkins for CI/CD automation and used AWS EKS for container orchestration, ensuring scalability and high availability. Additionally, I integrated SonarQube for code quality analysis and Trivy for Docker image vulnerability scanning. Real-time monitoring was enabled using Prometheus and Grafana, ensuring optimal performance and reliability.</p>
+      </div>
+      <div class="card">
+        <h3>Full-Stack Application Deployment</h3>
+        <p><strong>Technologies Used:</strong> Docker Compose, Node.js, MongoDB</p>
+        <p>For this project, I deployed a full-stack web application using Docker Compose to manage multi-container environments. The application utilized a Node.js backend with MongoDB, ensuring efficient and scalable data storage. Docker Compose simplified the orchestration and deployment, making the process seamless while maintaining a high degree of flexibility.</p>
+      </div>
+      <div class="card">
+        <h3>Portfolio Website CI/CD Deployment</h3>
+        <p><strong>Technologies Used:</strong> Docker, Kubernetes, GitHub Actions, Jenkins</p>
+        <p>I built and deployed this very portfolio website as a Docker container, running on an EC2 instance in AWS. I implemented a CI/CD pipeline using GitHub Actions for automated deployment to Kubernetes (kOps on AWS). This allowed for continuous integration and delivery, streamlining the entire deployment process while maintaining a high level of automation and monitoring through Prometheus and Grafana.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="contact-details">
+      <p><span>Email:</span> riswanrahmathulla2001@gmail.com</p>
+      <p><span>Phone:</span> +91 8078248737</p>
+      <p><span>Location:</span> Palakkad, India</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Riswan Rahmathulla. All Rights Reserved.</p>
+  </footer>
+</body>
+</html>
