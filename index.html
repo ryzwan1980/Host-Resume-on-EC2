@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initil-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Riswan Rahmathulla | AWS & DevOps Engineer</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
@@ -157,9 +157,44 @@
       }
     }
 
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .contact-form input, .contact-form textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+      width: 100%;
+      background-color: var(--card);
+      color: var(--text);
+    }
+
+    .contact-form button {
+      padding: 12px 20px;
+      border: none;
+      background-color: var(--accent);
+      color: white;
+      font-size: 1.1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .contact-form button:hover {
+      background-color: #00e676;
+    }
+
     @media (max-width: 768px) {
       header h1 {
         font-size: 2rem;
+      }
+
+      .contact-form button {
+        font-size: 1rem;
       }
     }
   </style>
@@ -251,4 +286,31 @@
     <div class="card">
       <p>
         🚀 This portfolio is <strong>running in a Docker container</strong> on an <strong>AWS EC2 instance</strong>.  
-        Every update pushed to GitHub triggers a <strong>GitHub Actions</strong> pipeline that automatically builds the Docker image and redeploys it in the EC2
+        Every update pushed to GitHub triggers a <strong>GitHub Actions</strong> pipeline that automatically builds the Docker image and redeploys it in the EC2.
+      </p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="card">
+      <form class="contact-form" action="mailto:riswanrahmathulla2001@gmail.com" method="post" enctype="text/plain">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Riswan Rahmathulla | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    document.getElementById("theme-toggle").addEventListener("click", function() {
+      document.body.toggleAttribute("data-theme");
+    });
+  </script>
+</body>
+</html>
