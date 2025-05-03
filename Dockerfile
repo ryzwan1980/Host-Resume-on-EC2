@@ -1,13 +1,5 @@
 # Start from the official Nginx base image
-FROM nginx:latest
-
-# Install Certbot and dependencies
-RUN apk update && apk add --no-cache \
-    certbot \
-    certbot-nginx \
-    bash \
-    curl \
-    && rm -rf /var/cache/apk/*
+FROM nginx:alpine
 
 # Remove default nginx index page
 RUN rm -rf /usr/share/nginx/html/*
@@ -15,10 +7,10 @@ RUN rm -rf /usr/share/nginx/html/*
 # Copy custom Nginx configuration and site content
 COPY index.html /usr/share/nginx/html/
 
-# Expose HTTP (80) and HTTPS (443) ports
-EXPOSE 80 443
+# Expose HTTP (80) port only
+EXPOSE 80
 
-# Start Nginx and run Certbot for SSL certificate setup
-CMD ["sh", "-c", "nginx -g 'daemon off;' & \
-                  certbot --nginx --non-interactive --agree-tos --email riswanrahmathulla2001@gmail.com -d ryzwan.techwiz.site && \
-                  tail -f /dev/null"]
+# Start Nginx in the foreground
+CMD ["nginx", "-g", "daemon off;"]
+
+                 
