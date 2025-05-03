@@ -1,19 +1,31 @@
-name: Auto-Deploy index.html to EC2 Apache
+name: Docker Nginx Deploy to EC2
 
 on:
   push:
     branches:
-      - main  # Change this if you use a different branch
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up SSH Key
+      - name: Build Docker image
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/nginx-web:latest .
+
+      - name: Login to Docker Hub
+        run: |
+          echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+      - name: Push image to Docker Hub
+        run: |
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/nginx-web:latest
+
+      - name: Set up SSH key
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
@@ -23,22 +35,11 @@ jobs:
         run: |
           ssh-keyscan -H ${{ secrets.EC2_PUBLIC_IP }} >> ~/.ssh/known_hosts
 
-      - name: Upload index.html to EC2
-        run: |
-          scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no index.html ubuntu@${{ secrets.EC2_PUBLIC_IP }}:/tmp/index.html
-
-      - name: Deploy index.html on Apache
+      - name: Deploy container on EC2
         run: |
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
-            # Move the uploaded file to Apache web root
-            sudo mv /tmp/index.html /var/www/html/index.html
-
-            # Set correct permissions (optional but safe)
-            sudo chown www-data:www-data /var/www/html/index.html
-            sudo chmod 644 /var/www/html/index.html
-
-            # Restart Apache to reflect changes (optional)
-            sudo systemctl restart apache2
-
-            echo "✅ index.html deployed successfully!"
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/nginx-web:latest
+            docker stop web || true && docker rm web || true
+            docker run -d --name web -p 80:80 ${{ secrets.DOCKERHUB_USERNAME }}/nginx-web:latest
+            echo "✅ New container running with latest index.html"
           EOF
