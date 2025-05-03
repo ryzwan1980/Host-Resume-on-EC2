@@ -17,7 +17,7 @@ jobs:
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/nginx-web:latest .
 
-      - name: Login to Docker Hub
+      - name: Log in to Docker Hub
         run: |
           echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
@@ -38,8 +38,20 @@ jobs:
       - name: Deploy container on EC2
         run: |
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/nginx-web:latest
-            docker stop web || true && docker rm web || true
-            docker run -d --name web -p 80:80 ${{ secrets.DOCKERHUB_USERNAME }}/nginx-web:latest
-            echo "✅ New container running with latest index.html"
+            set -e
+
+            echo "✅ Logging into EC2"
+            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/nginx-web:latest
+
+            echo "🛑 Stopping existing container (if any)"
+            sudo docker stop web || true
+            sudo docker rm web || true
+
+            echo "🚀 Starting new container"
+            sudo docker run -d --name web -p 80:80 ${{ secrets.DOCKERHUB_USERNAME }}/nginx-web:latest
+
+            echo "🔍 Running containers:"
+            sudo docker ps
+
+            echo "✅ Deployment done"
           EOF
