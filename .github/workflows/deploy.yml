@@ -1,0 +1,40 @@
+name: Deploy to EC2 (Apache2 - index.html)
+
+on:
+  push:
+    branches:
+      - main  # Trigger on push to the 'main' branch (modify as needed)
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Set up SSH key
+      - name: Set up SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "$EC2_SSH_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+        env:
+          EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+
+      # Step 3: Add EC2 instance to known hosts to prevent "Are you sure?" prompt
+      - name: Add EC2 to known hosts
+        run: |
+          ssh-keyscan -H ${{ secrets.EC2_PUBLIC_IP }} >> ~/.ssh/known_hosts
+
+      # Step 4: Deploy the code to EC2
+      - name: Deploy to EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
+            # Go to Apache directory and replace index.html
+            sudo cp /path/to/your/repo/index.html /var/www/html/index.html
+
+            # Restart Apache to make sure the changes take effect (optional)
+            sudo systemctl restart apache2
+          EOF
