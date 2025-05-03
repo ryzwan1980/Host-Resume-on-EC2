@@ -32,9 +32,9 @@ jobs:
       - name: Deploy to EC2
         run: |
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
-            # Go to Apache directory and replace index.html
-            sudo cp /path/to/your/repo/index.html /var/www/html/index.html
+            # Copy the index.html from the repo to /var/www/html/
+            sudo cp ~/my-repo/index.html /var/www/html/index.html
 
-            # Restart Apache to make sure the changes take effect (optional)
+            # Restart Apache to make sure the changes take effect
             sudo systemctl restart apache2
           EOF
