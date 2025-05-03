@@ -53,14 +53,15 @@
     section {
       padding: 80px 20px;
       text-align: center;
+      margin-bottom: 80px;
     }
 
     section h2 {
       font-size: 2.5em;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
       color: #333;
-      animation: slideUp 1s ease-out;
       font-family: 'Ubuntu', sans-serif;
+      animation: slideUp 1s ease-out;
     }
 
     section p {
@@ -80,6 +81,7 @@
       font-size: 1.1em;
       color: #555;
       animation: fadeIn 1.5s ease-in-out;
+      margin-top: 20px;
     }
 
     .contact-details span {
@@ -114,16 +116,16 @@
     /* Card Container Styling */
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
       padding: 40px 20px;
     }
 
     .card {
       background-color: #fff;
-      border-radius: 8px;
+      border-radius: 10px;
       box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       padding: 30px;
       text-align: left;
       font-size: 1.1em;
@@ -131,6 +133,7 @@
 
     .card:hover {
       transform: translateY(-10px);
+      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.2);
     }
 
     .card h3 {
@@ -149,6 +152,14 @@
       list-style-type: square;
       color: #444;
       padding-left: 20px;
+    }
+
+    .card a {
+      color: #00c853;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 20px;
+      display: inline-block;
     }
 
     /* Footer Styling */
@@ -231,7 +242,12 @@
       <div class="card">
         <h3>Portfolio Website CI/CD Deployment</h3>
         <p><strong>Technologies Used:</strong> Docker, Kubernetes, GitHub Actions, Jenkins</p>
-        <p>I built and deployed this very portfolio website as a Docker container, running on an EC2 instance in AWS. I implemented a CI/CD pipeline using GitHub Actions for automated deployment to Kubernetes (kOps on AWS). This allowed for continuous integration and delivery, streamlining the entire deployment process while maintaining a high level of automation and monitoring through Prometheus and Grafana.</p>
+        <p>My portfolio website is hosted on an EC2 instance as a containerized application using Docker. I implemented a CI/CD pipeline leveraging GitHub Actions, automating the deployment process to a Kubernetes cluster (kOps on AWS). This setup streamlines the entire deployment workflow, while monitoring through Prometheus and Grafana ensures high availability and performance.</p>
+      </div>
+      <div class="card">
+        <h3>Infrastructure as Code & Automation</h3>
+        <p><strong>Technologies Used:</strong> Terraform, Ansible</p>
+        <p>In this project, I used Terraform for automating infrastructure provisioning and Ansible for configuration management and deployment automation. The use of Infrastructure as Code (IaC) allowed for scalable and repeatable infrastructure setups, reducing manual intervention and increasing efficiency.</p>
       </div>
     </div>
   </section>
@@ -242,13 +258,4 @@
     <div class="contact-details">
       <p><span>Email:</span> riswanrahmathulla2001@gmail.com</p>
       <p><span>Phone:</span> +91 8078248737</p>
-      <p><span>Location:</span> Palakkad, India</p>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Riswan Rahmathulla. All Rights Reserved.</p>
-  </footer>
-</body>
-</html>
+      <p><span>Location:</span
