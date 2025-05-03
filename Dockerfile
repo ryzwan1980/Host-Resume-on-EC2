@@ -13,7 +13,6 @@ RUN apk update && apk add --no-cache \
 RUN rm -rf /usr/share/nginx/html/*
 
 # Copy custom Nginx configuration and site content
-COPY nginx.conf /etc/nginx/nginx.conf
 COPY index.html /usr/share/nginx/html/
 
 # Expose HTTP (80) and HTTPS (443) ports
@@ -21,5 +20,5 @@ EXPOSE 80 443
 
 # Start Nginx and run Certbot for SSL certificate setup
 CMD ["sh", "-c", "nginx -g 'daemon off;' & \
-                  certbot --nginx --non-interactive --agree-tos --email riswanrahmathulla2001.com -d ryzwan.techwiz.site && \
+                  certbot --nginx --non-interactive --agree-tos --email riswanrahmathulla2001@gmail.com -d ryzwan.techwiz.site && \
                   tail -f /dev/null"]
