@@ -1,316 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Riswan Rahmathulla | AWS & DevOps Engineer</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Riswan Rahmathulla - AWS DevOps Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #f4f7fa;
-      --text: #1c1c1c;
-      --accent: #00c853;
-      --card: #ffffff;
-    }
-
-    [data-theme="dark"] {
-      --bg: #121212;
-      --text: #f5f5f5;
-      --accent: #00e676;
-      --card: #1f1f1f;
-    }
-
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-      transition: background 0.4s ease, color 0.4s ease;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(to right, #1f1c2c, #928dab);
+      color: #fff;
+      padding: 20px;
+      line-height: 1.6;
     }
 
-    nav {
-      background: #111;
-      color: white;
-      padding: 1rem 0;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    nav a {
-      color: white;
-      margin: 0 20px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: var(--accent);
-    }
-
-    #theme-toggle {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      padding: 5px 15px;
-      font-size: 0.9em;
-      border: 2px solid var(--accent);
-      background: transparent;
-      color: var(--accent);
-      border-radius: 20px;
-      cursor: pointer;
-    }
-
-    header {
-      background: linear-gradient(to right, #111, #333);
-      color: white;
-      padding: 100px 20px 50px;
-      text-align: center;
-    }
-
-    header h1 {
-      font-size: 3.5rem;
-    }
-
-    .typewriter {
-      font-family: monospace;
-      font-size: 1.4rem;
-      color: var(--accent);
-      overflow: hidden;
-      white-space: nowrap;
-      width: 0;
-      border-right: 3px solid var(--accent);
-      animation: typing 4s steps(40, end) forwards, blink 0.75s step-end infinite;
-      margin-top: 10px;
-    }
-
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
-
-    @keyframes blink {
-      50% { border-color: transparent; }
-    }
-
-    section {
-      padding: 60px 20px;
-      max-width: 1100px;
+    .container {
+      max-width: 1000px;
       margin: auto;
-    }
-
-    section h2 {
-      font-size: 2.2rem;
-      margin-bottom: 25px;
-      color: var(--accent);
-    }
-
-    .card {
-      background: var(--card);
-      padding: 30px;
-      margin-bottom: 40px;
+      padding: 40px;
+      background-color: rgba(0, 0, 0, 0.4);
       border-radius: 10px;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeInUp 0.7s ease forwards;
+      animation: fadeIn 1.5s ease-in-out;
     }
 
-    .card h3 {
-      color: var(--text);
-      margin-bottom: 10px;
+    h1, h2 {
+      margin-bottom: 20px;
+      border-bottom: 2px solid #fff;
+      padding-bottom: 5px;
     }
 
-    .card p {
-      color: #555;
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .project, .experience {
+      margin-bottom: 20px;
+      animation: slideIn 1s ease-out;
+    }
+
+    .contact a {
+      color: #ffd700;
+      text-decoration: none;
+    }
+
+    .contact a:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes slideIn {
+      from {opacity: 0; transform: translateX(-100%);}
+      to {opacity: 1; transform: translateX(0);}
     }
 
     .highlight {
+      color: #ffd700;
       font-weight: bold;
-      color: var(--accent);
-    }
-
-    footer {
-      background: #111;
-      color: white;
-      text-align: center;
-      padding: 30px 0;
-      margin-top: 60px;
-    }
-
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .contact-form input, .contact-form textarea {
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 1rem;
-      width: 100%;
-      background-color: var(--card);
-      color: var(--text);
-    }
-
-    .contact-form button {
-      padding: 12px 20px;
-      border: none;
-      background-color: var(--accent);
-      color: white;
-      font-size: 1.1rem;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .contact-form button:hover {
-      background-color: #00e676;
-    }
-
-    @media (max-width: 768px) {
-      header h1 {
-        font-size: 2rem;
-      }
-
-      .contact-form button {
-        font-size: 1rem;
-      }
     }
   </style>
 </head>
 <body>
 
-  <button id="theme-toggle">Dark Mode</button>
+  <div class="container">
 
-  <nav>
-    <a href="#profile">Profile</a>
-    <a href="#experience">Experience</a>
-    <a href="#projects">Projects</a>
-    <a href="#deployment">Hosting</a>
-    <a href="#contact">Contact</a>
-  </nav>
-
-  <header>
     <h1>Riswan Rahmathulla</h1>
-    <div class="typewriter">AWS Cloud Architect & DevOps Enthusiast</div>
-  </header>
+    <p><strong>Location:</strong> Palakkad, India</p>
+    <p><strong>Email:</strong> <a href="mailto:riswanrahmathulla2001@gmail.com">riswanrahmathulla2001@gmail.com</a></p>
+    <p><strong>Phone:</strong> <a href="tel:+918078248737">+91 8078248737</a></p>
+    <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/riswan-rahmathulla" target="_blank">riswan-rahmathulla</a></p>
 
-  <section id="profile">
-    <h2>Profile</h2>
-    <div class="card">
+    <div class="section">
+      <h2>Profile</h2>
       <p>
-        I'm an AWS Cloud Architect and Technical Support Engineer with a passion for infrastructure, DevOps, and automation.
-        I specialize in scalable cloud deployments, CI/CD pipeline integration, container orchestration, and infrastructure as code (IaC).
-        My approach blends technical proficiency with a customer-first mindset and a hunger for continual learning in the cloud domain.
-      </p>
-    </div>
-  </section>
-
-  <section id="experience">
-    <h2>Professional Experience</h2>
-    <div class="card">
-      <h3>Postiefs Technologies, Coimbatore</h3>
-      <p><strong>Position:</strong> AWS Architect & Cloud Engineer<br>
-         <strong>Duration:</strong> February 2024 – Present</p>
-      <p>
-        - Engineered end-to-end AWS infrastructure including VPC, EC2, RDS, S3, WAF, and Load Balancers.<br>
-        - Developed Jenkins-based CI/CD pipelines for scalable Auto Scaling deployments.<br>
-        - Led deployments for over 80 clients across automotive, news, and media sectors.<br>
-        - Introduced automation strategies that reduced manual server provisioning by 80%.<br>
-        - Collaborated closely with DevSecOps teams for secure infrastructure rollouts.
-      </p>
-    </div>
-  </section>
-
-  <section id="projects">
-    <h2>Projects</h2>
-
-    <div class="card">
-      <h3>Netflix Clone Deployment</h3>
-      <p>
-        Deployed a Netflix-inspired app using <span class="highlight">Docker</span>, with <span class="highlight">Jenkins</span> managing CI/CD.
-        Code quality was enforced using <span class="highlight">SonarQube</span> and vulnerabilities checked with <span class="highlight">Trivy</span>.
-        The app was orchestrated in <span class="highlight">AWS EKS</span> for high availability, monitored in real time via <span class="highlight">Prometheus</span> and <span class="highlight">Grafana</span>.
+        As an AWS Certified DevOps Engineer, I specialize in designing scalable and efficient cloud infrastructures. With hands-on experience in automating deployments, managing CI/CD pipelines, and optimizing cloud resources, I am committed to delivering high-quality solutions that drive business success.
       </p>
     </div>
 
-    <div class="card">
-      <h3>Full-Stack App Deployment</h3>
-      <p>
-        Designed and deployed a full-stack app (Node.js + MongoDB) using <span class="highlight">Docker Compose</span>.
-        Simplified multi-container orchestration and ensured environment parity across dev, staging, and production.
-      </p>
+    <div class="section">
+      <h2>Professional Experience</h2>
+      <div class="experience">
+        <p><strong>Postiefs Technologies Private Limited, Coimbatore</strong> (Feb 2024 - Present)</p>
+        <ul>
+          <li>Architected and deployed cost-effective AWS solutions using EC2, Load Balancers, RDS, VPCs, NAT Gateways, WAF, IAM, and S3 based on client requirements.</li>
+          <li>Automated deployments using AWS Auto Scaling and Jenkins, ensuring seamless code updates across scaling groups.</li>
+          <li>Handled cloud architecture for 80+ clients including top-tier automobile companies and news agencies, delivering optimized and secure infrastructures.</li>
+        </ul>
+      </div>
     </div>
 
-    <div class="card">
-      <h3>Infrastructure as Code & Automation</h3>
-      <p>
-        Used <span class="highlight">Terraform</span> for provisioning EC2, VPCs, and IAM roles.
-        Integrated <span class="highlight">Ansible</span> for configuration management, allowing full-scale automation of infrastructure deployment and application rollouts.
-      </p>
+    <div class="section">
+      <h2>Projects</h2>
+
+      <div class="project">
+        <p><span class="highlight">Netflix Clone Deployment</span> – Built and deployed a scalable Netflix-like streaming platform using Docker for containerization. Implemented SonarQube for code quality, Trivy for image scanning, Jenkins for CI/CD, and Prometheus + Grafana for real-time monitoring. Deployed to AWS EKS ensuring high availability.</p>
+      </div>
+
+      <div class="project">
+        <p><span class="highlight">Full-Stack Application Deployment</span> – Deployed a containerized full-stack web application using Docker Compose. This setup simplified multi-container orchestration and enabled easy scaling and maintainability.</p>
+      </div>
+
+      <div class="project">
+        <p><span class="highlight">Infrastructure as Code & Automation</span> – Developed reusable Terraform scripts to automate infrastructure provisioning and used Ansible to manage server configurations and deployments efficiently.</p>
+      </div>
+
+      <div class="project">
+        <p><span class="highlight">Portfolio Website CI/CD Deployment</span> – Containerized and deployed a professional portfolio website using Jenkins CI/CD pipeline on a Kubernetes cluster managed by kOps on AWS. Monitoring was set up using Prometheus and Grafana.</p>
+        <p><em>This website is currently hosted as a Docker container on an AWS EC2 instance, and automatically deployed through GitHub Actions, ensuring continuous delivery.</em></p>
+      </div>
     </div>
 
-    <div class="card">
-      <h3>Portfolio Website CI/CD</h3>
-      <p>
-        Developed this very portfolio using <span class="highlight">Docker</span> and hosted it on an <span class="highlight">AWS EC2 instance</span>.
-        CI/CD pipeline was built using <span class="highlight">GitHub Actions</span>, automating build and deployment every time new changes are pushed.
-        Container logs and performance are continuously monitored using <span class="highlight">Prometheus</span> and <span class="highlight">Grafana</span>.
-      </p>
+    <div class="section">
+      <h2>Certifications</h2>
+      <p><strong>AWS Certified Solutions Architect – Associate</strong></p>
+      <p>Validation Number: ZJM868S242BQ13S1 (Valid: May 2023 - May 2026)</p>
     </div>
-  </section>
 
-  <section id="deployment">
-    <h2>Hosting & Deployment</h2>
-    <div class="card">
-      <p>
-        🚀 This portfolio is <strong>running in a Docker container</strong> on an <strong>AWS EC2 instance</strong>.  
-        Every update pushed to GitHub triggers a <strong>GitHub Actions</strong> pipeline that automatically builds the Docker image and redeploys it in the EC2.
-      </p>
+    <div class="section">
+      <h2>Technical Skills</h2>
+      <ul>
+        <li><strong>AWS:</strong> EC2, S3, RDS, VPC, Lambda, Auto Scaling, IAM, CloudFront, VPN, CloudTrail, EventBridge</li>
+        <li><strong>DevOps:</strong> Jenkins, Ansible, Docker, Docker Compose, Terraform, Kubernetes, Prometheus, Grafana</li>
+        <li><strong>OS & Scripting:</strong> Linux Administration, Shell Scripting</li>
+      </ul>
     </div>
-  </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <div class="card">
-      <form class="contact-form" action="mailto:riswanrahmathulla2001@gmail.com" method="post" enctype="text/plain">
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Your Email" required>
-        <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
-        <button type="submit">Send Message</button>
-      </form>
+    <div class="section">
+      <h2>Education</h2>
+      <p><strong>Bachelor of Computer Applications</strong></p>
+      <p>Nehru Arts and Science College (Bharathiar University) – Graduated June 2022</p>
     </div>
-  </section>
 
-  <footer>
-    <p>&copy; 2025 Riswan Rahmathulla | All Rights Reserved</p>
-  </footer>
 
-  <script>
-    document.getElementById("theme-toggle").addEventListener("click", function() {
-      document.body.toggleAttribute("data-theme");
-    });
-  </script>
-</body>
-</html>
+::contentReference[oaicite:0]{index=0}
+ 
