@@ -1,5 +1,5 @@
 # Start from the official Nginx base image
-FROM nginx:alpine
+FROM nginx:latest
 
 # Install Certbot and dependencies
 RUN apk update && apk add --no-cache \
