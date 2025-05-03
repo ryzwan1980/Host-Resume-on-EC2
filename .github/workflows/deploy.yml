@@ -1,40 +1,44 @@
-name: Deploy to EC2 (Apache2 - index.html)
+name: Auto-Deploy index.html to EC2 Apache
 
 on:
   push:
     branches:
-      - main  # Trigger on push to the 'main' branch (modify as needed)
+      - main  # Change this if you use a different branch
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repository
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v2
 
-      # Step 2: Set up SSH key
-      - name: Set up SSH key
+      - name: Set up SSH Key
         run: |
           mkdir -p ~/.ssh
-          echo "$EC2_SSH_KEY" > ~/.ssh/id_rsa
+          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-        env:
-          EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
 
-      # Step 3: Add EC2 instance to known hosts to prevent "Are you sure?" prompt
       - name: Add EC2 to known hosts
         run: |
           ssh-keyscan -H ${{ secrets.EC2_PUBLIC_IP }} >> ~/.ssh/known_hosts
 
-      # Step 4: Deploy the code to EC2
-      - name: Deploy to EC2
+      - name: Upload index.html to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
-            # Copy the index.html from the repo to /var/www/html/
-            sudo cp ~/my-repo/index.html /var/www/html/index.html
+          scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no index.html ubuntu@${{ secrets.EC2_PUBLIC_IP }}:/tmp/index.html
 
-            # Restart Apache to make sure the changes take effect
+      - name: Deploy index.html on Apache
+        run: |
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
+            # Move the uploaded file to Apache web root
+            sudo mv /tmp/index.html /var/www/html/index.html
+
+            # Set correct permissions (optional but safe)
+            sudo chown www-data:www-data /var/www/html/index.html
+            sudo chmod 644 /var/www/html/index.html
+
+            # Restart Apache to reflect changes (optional)
             sudo systemctl restart apache2
+
+            echo "✅ index.html deployed successfully!"
           EOF
