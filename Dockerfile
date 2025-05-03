@@ -21,5 +21,5 @@ EXPOSE 80 443
 
 # Start Nginx and run Certbot for SSL certificate setup
 CMD ["sh", "-c", "nginx -g 'daemon off;' & \
-                  certbot --nginx --non-interactive --agree-tos --email your-email@example.com -d yourdomain.com && \
+                  certbot --nginx --non-interactive --agree-tos --email riswanrahmathulla2001.com -d ryzwan.techwiz.site && \
                   tail -f /dev/null"]
