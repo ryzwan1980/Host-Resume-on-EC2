@@ -1,4 +1,4 @@
-name: Docker Nginx Deploy to EC2
+name: Docker Nginx Deploy to EC2 via Kubernetes
 
 on:
   push:
@@ -35,23 +35,16 @@ jobs:
         run: |
           ssh-keyscan -H ${{ secrets.EC2_PUBLIC_IP }} >> ~/.ssh/known_hosts
 
-      - name: Deploy container on EC2
+      - name: Update demo.yaml with latest image
         run: |
+          sed -i "s|image: .*|image: ${{ secrets.DOCKERHUB_USERNAME }}/nginx-web:latest|" demo.yaml
+
+      - name: Copy demo.yaml to EC2 and apply
+        run: |
+          scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no demo.yaml ubuntu@${{ secrets.EC2_PUBLIC_IP }}:/home/ubuntu/demo.yaml
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
             set -e
-
-            echo "✅ Logging into EC2"
-            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/nginx-web:latest
-
-            echo "🛑 Stopping existing container (if any)"
-            sudo docker stop web || true
-            sudo docker rm web || true
-
-            echo "🚀 Starting new container"
-            sudo docker run -d --name web -p 80:80 ${{ secrets.DOCKERHUB_USERNAME }}/nginx-web:latest
-
-            echo "🔍 Running containers:"
-            sudo docker ps
-
-            echo "✅ Deployment done"
+            echo "📦 Applying Kubernetes manifest..."
+            kubectl apply -f /home/ubuntu/demo.yaml
+            echo "✅ Deployment complete."
           EOF
