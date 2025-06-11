@@ -9,7 +9,7 @@ metadata:
   # The name of the deployment is "nginx-app".
 
 spec:
-  replicas: 2
+  replicas: 3
   # Defines the desired number of pod replicas (2 pods will be running).
 
   selector:
@@ -29,8 +29,9 @@ spec:
         # Name of the container inside the pod.
 
         image: ryzwan1980/nginx-web
+        imagePullPolicy: Always
         # Docker image to use for the container.
 
         ports:
-        - containerPort: 5173
+        - containerPort: 80
           # Exposes port 80 on the container.
