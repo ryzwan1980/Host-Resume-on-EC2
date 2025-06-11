@@ -35,16 +35,15 @@ jobs:
         run: |
           ssh-keyscan -H ${{ secrets.EC2_PUBLIC_IP }} >> ~/.ssh/known_hosts
 
-      - name: Update demo.yaml with latest image
+      - name: Update and apply Kubernetes manifest on EC2
         run: |
-          sed -i "s|image: .*|image: ${{ secrets.DOCKERHUB_USERNAME }}/nginx-web:latest|" demo.yaml
-
-      - name: Copy demo.yaml to EC2 and apply
-        run: |
-          scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no demo.yaml ubuntu@${{ secrets.EC2_PUBLIC_IP }}:/home/ubuntu/demo.yaml
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_PUBLIC_IP }} << EOF
             set -e
-            echo "📦 Applying Kubernetes manifest..."
-            kubectl apply -f /home/ubuntu/demo.yaml
-            echo "✅ Deployment complete."
+            echo "🔄 Updating image in /root/kube/demo.yaml"
+            sudo sed -i 's|image: .*|image: ${{ secrets.DOCKERHUB_USERNAME }}/nginx-web:latest|' /root/kube/demo.yaml
+
+            echo "🚀 Applying manifest with kubectl"
+            sudo kubectl apply -f /root/kube/demo.yaml
+
+            echo "✅ Kubernetes deployment applied"
           EOF
