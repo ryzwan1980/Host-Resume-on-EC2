@@ -23,7 +23,7 @@ jobs:
 
       - name: Push image to Docker Hub
         run: |
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/nginx-web:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/nginx-web:v1 .
 
       - name: Set up SSH key
         run: |
