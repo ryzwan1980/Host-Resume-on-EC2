@@ -39,11 +39,11 @@ jobs:
         run: |
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_PUBLIC_IP }} << EOF
             set -e
-            echo "🔄 Updating image in /root/kube/demo.yaml"
+            echo "🔄 Updating image in /root/k8/demo.yaml"
             sudo sed -i 's|image: .*|image: ${{ secrets.DOCKERHUB_USERNAME }}/nginx-web:latest|' /root/kube/demo.yaml
 
             echo "🚀 Applying manifest with kubectl"
-            sudo kubectl apply -f /root/kube/demo.yaml
+            sudo kubectl apply -f /root/k8/demo.yaml
 
             echo "✅ Kubernetes deployment applied"
           EOF
