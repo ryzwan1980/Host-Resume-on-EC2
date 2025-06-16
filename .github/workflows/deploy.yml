@@ -15,7 +15,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/nginx-web:latest .
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/nginx-web:v1
 
       - name: Log in to Docker Hub
         run: |
